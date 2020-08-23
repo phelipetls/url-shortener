@@ -17,5 +17,6 @@ def get_short_url(url, alias=None):
         short_string = alias
     else:
         hashed = md5(url.encode())
-        short_string = b32encode(hashed.digest())[:6]
-    return short_string.decode()
+        b32encoded = b32encode(hashed.digest())
+        short_string = b32encoded.decode()[:6]
+    return short_string
