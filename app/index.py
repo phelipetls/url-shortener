@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, url_for, redirect
 from app import db
 from .db import Url
-from .url_utils import get_short_url
+from .url_utils import get_short_url, check_url
 from sqlalchemy.exc import IntegrityError
 
 bp = Blueprint("index", __name__)
@@ -23,6 +23,11 @@ def new():
 
     url = json.get("url")
     alias = json.get("alias")
+
+    message = check_url(url)
+
+    if message:
+        return {"message": message}, 400
 
     short_url = get_short_url(url, alias=alias)
 

@@ -9,7 +9,7 @@ def check_url(url):
     scheme = parsed_url.scheme
 
     if scheme in ["data", "javascript"]:
-        return "The '{}' URL scheme is not allowed".format(scheme)
+        return "Unallowed URI scheme".format(scheme)
 
 
 def get_short_url(url, alias=None):
