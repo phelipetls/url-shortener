@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, redirect
+from flask import Blueprint, render_template, request, redirect
 from app import db
 from .db import Url
 from .url_utils import get_short_url, check_url

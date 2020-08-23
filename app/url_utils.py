@@ -1,4 +1,3 @@
-from flask import url_for
 from hashlib import md5
 from base64 import b32encode
 from urllib.parse import urlparse

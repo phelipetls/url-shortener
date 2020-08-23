@@ -1,4 +1,5 @@
 import re
+
 import pytest
 import html
 
@@ -33,13 +34,13 @@ def test_new_already_shortened_url(client, db):
 
 
 def test_new_invalid_uri_schemes(client, db):
-    """POST /new with invalid schemes should return 400 BAD REQUEST."""
+    """POST /new with invalid URI scheme should return 400 BAD REQUEST."""
     response = client.post("/new", json={"url": "javascript:void(0)"})
     assert response.status_code == 400
 
 
 def test_redirect(client, db):
-    """GET /<short_url> should return 302 FOUND (Redirect)."""
+    """GET /<short_url> should return 302 FOUND."""
     short_url = Url.query.filter_by(url=URL).first().short_url
 
     response = client.get(f"/{short_url}")
