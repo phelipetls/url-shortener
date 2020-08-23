@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, url_for, redirect
 from app import db
 from .db import Url
 from .url_utils import get_short_url
+from sqlalchemy.exc import IntegrityError
 
 bp = Blueprint("index", __name__)
 
@@ -26,7 +27,11 @@ def new():
     short_url = get_short_url(url, alias=alias)
 
     new_row = Url(url=url, short_url=short_url)
-    db.session.add(new_row)
-    db.session.commit()
+
+    try:
+        db.session.add(new_row)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
 
     return {"short_url": short_url}, 200
