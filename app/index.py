@@ -24,10 +24,10 @@ def new():
     url = json.get("url")
     alias = json.get("alias")
 
-    message = check_url(url)
+    error = check_url(url)
 
-    if message:
-        return {"message": message}, 400
+    if error:
+        return {"error": error}, 400
 
     short_url = get_short_url(url, alias=alias)
 
