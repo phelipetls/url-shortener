@@ -2,7 +2,7 @@ import re
 import pytest
 import html
 
-from app.models import Url
+from app.db import Url
 
 URL = "https://google.com"
 

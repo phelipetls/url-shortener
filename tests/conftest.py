@@ -1,7 +1,7 @@
 import pytest
 
 from app import create_app
-from app import db as _db
+from app.db import db as _db
 from dotenv import load_dotenv
 
 
@@ -23,6 +23,5 @@ def client(app):
 @pytest.fixture(scope="session")
 def db(app):
     with app.app_context():
-        _db.create_all()
         yield _db
         _db.drop_all()

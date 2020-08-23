@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, url_for, redirect
 from app import db
-from .models import Url
+from .db import Url
 from .url_utils import get_short_url
 
 bp = Blueprint("index", __name__)

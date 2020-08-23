@@ -1,8 +1,6 @@
 import os
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from .db import db
 
 def create_app(config='config.Config'):
     app = Flask(__name__)
@@ -11,6 +9,8 @@ def create_app(config='config.Config'):
     db.init_app(app)
 
     with app.app_context():
+        db.create_all()
+
         from . import index
         app.register_blueprint(index.bp)
 
