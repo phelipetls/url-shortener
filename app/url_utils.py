@@ -5,7 +5,12 @@ from urllib.parse import urlparse
 
 def check_url(url):
     parsed_url = urlparse(url)
+
     scheme = parsed_url.scheme
+    netloc = parsed_url.netloc
+
+    if not netloc:
+        return "Invalid URL: no network location"
 
     if scheme in ["data", "javascript"]:
         return "Unallowed URI scheme".format(scheme)

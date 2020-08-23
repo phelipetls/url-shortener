@@ -39,6 +39,12 @@ def test_new_invalid_uri_schemes(client, db):
     assert response.status_code == 400
 
 
+def test_new_no_network_location(client, db):
+    """POST /new with no network location should return 400 BAD REQUEST."""
+    response = client.post("/new", json={"url": "https://"})
+    assert response.status_code == 400
+
+
 def test_redirect(client, db):
     """GET /<short_url> should return 302 FOUND."""
     short_url = Url.query.filter_by(url=URL).first().short_url
