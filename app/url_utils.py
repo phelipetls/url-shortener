@@ -8,11 +8,11 @@ def check_url(url):
     scheme = parsed_url.scheme
     netloc = parsed_url.netloc
 
+    if scheme in ["data", "javascript"]:
+        return "Unallowed URI scheme"
+
     if not netloc:
         return "Invalid URL: no network location"
-
-    if scheme in ["data", "javascript"]:
-        return "Unallowed URI scheme".format(scheme)
 
 
 def get_short_url(alias=None):

@@ -1,4 +1,5 @@
 import html
+import pytest
 
 from app.db import Url
 from datetime import datetime
@@ -69,16 +70,27 @@ def test_already_shortened_url(client):
     assert response.status_code == 200
 
 
-def test_invalid_uri_schemes(client):
-    response = client.post("/new", json={"url": "javascript:void(0)"})
-    assert response.status_code == 400
-
-
-def test_no_network_location(client):
-    response = client.post("/new", json={"url": "https://"})
-    assert response.status_code == 400
-
-
 def test_missing_short_url(client):
     response = client.get("/45123")
     assert response.status_code == 404
+
+
+@pytest.mark.parametrize(
+    ("url", "message"),
+    (
+        ("javascript:void(0)", "Unallowed URI scheme"),
+        ("https://", "Invalid URL: no network location"),
+    ),
+)
+def test_invalid_urls(client, url, message):
+    response = client.post("/new", json={"url": url})
+    assert response.status_code == 400
+    assert response.json == {"error": message}
+
+
+def test_new_non_iso_date(client):
+    response = client.post(
+        "/new", json={"url": URL, "alias": "expired", "expiration_date": "INVALID"},
+    )
+    assert response.status_code == 400
+    assert response.json == {"error": "INVALID is not in ISO format"}
