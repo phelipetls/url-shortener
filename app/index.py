@@ -39,7 +39,7 @@ def new():
     if error:
         return {"error": error}, 400
 
-    short_url = get_short_url(url, alias=alias)
+    short_url = get_short_url(alias)
 
     if expiration_date:
         try:

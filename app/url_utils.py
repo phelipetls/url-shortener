@@ -1,5 +1,4 @@
-from hashlib import md5
-from base64 import b32encode
+from secrets import token_urlsafe
 from urllib.parse import urlparse
 
 
@@ -16,11 +15,9 @@ def check_url(url):
         return "Unallowed URI scheme".format(scheme)
 
 
-def get_short_url(url, alias=None):
+def get_short_url(alias=None):
     if alias:
         short_string = alias
     else:
-        hashed = md5(url.encode())
-        b32encoded = b32encode(hashed.digest())
-        short_string = b32encoded.decode()[:6]
+        short_string = token_urlsafe(4)
     return short_string
