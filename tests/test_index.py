@@ -11,7 +11,7 @@ def test_index(client):
     assert response.status_code == 200
 
 
-def test_new(client, db):
+def test_new(client):
     response = client.post("/new", json={"url": URL})
     assert response.status_code == 200
 
@@ -24,19 +24,19 @@ def test_redirect(client, db):
     assert response.headers["Location"] == html.escape(URL)
 
 
-def test_new_with_alias(client, db):
+def test_new_with_alias(client):
     response = client.post("/new", json={"alias": "my-site", "url": URL})
     assert response.json["short_url"] == "my-site"
     assert response.status_code == 200
 
 
-def test_redirect_with_alias(client, db):
+def test_redirect_with_alias(client):
     response = client.get("/my-site")
     assert response.status_code == 302
     assert response.headers["Location"] == html.escape(URL)
 
 
-def test_new_with_expiration_date(client, db):
+def test_new_with_expiration_date(client):
     expiration_date = datetime(2020, 1, 2)
     response = client.post(
         "/new",
@@ -49,28 +49,28 @@ def test_new_with_expiration_date(client, db):
     assert response.status_code == 200
 
 
-def test_redirect_link_not_yet_expired(mocked_now, client, db):
+def test_redirect_link_not_yet_expired(mocked_now, client):
     response = client.get("/expired")
     assert response.status_code == 302
 
 
-def test_redirect_link_expired(client, db):
+def test_redirect_link_expired(client):
     response = client.get("/expired")
     assert response.status_code == 400
     assert "error" in response.json
 
 
-def test_already_shortened_url(client, db):
+def test_already_shortened_url(client):
     response = client.post("/new", json={"url": URL})
     assert response.status_code == 200
 
 
-def test_invalid_uri_schemes(client, db):
+def test_invalid_uri_schemes(client):
     response = client.post("/new", json={"url": "javascript:void(0)"})
     assert response.status_code == 400
 
 
-def test_no_network_location(client, db):
+def test_no_network_location(client):
     response = client.post("/new", json={"url": "https://"})
     assert response.status_code == 400
 
