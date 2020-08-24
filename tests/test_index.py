@@ -2,6 +2,7 @@ import html
 
 from app.db import Url
 from datetime import datetime
+from freezegun import freeze_time
 
 URL = "https://google.com"
 
@@ -36,20 +37,23 @@ def test_redirect_with_alias(client):
     assert response.headers["Location"] == html.escape(URL)
 
 
+EXPIRATION_DATE = datetime(2020, 1, 2)
+
+
 def test_new_with_expiration_date(client):
-    expiration_date = datetime(2020, 1, 2)
     response = client.post(
         "/new",
         json={
             "url": URL,
             "alias": "expired",
-            "expiration_date": expiration_date.isoformat(),
+            "expiration_date": EXPIRATION_DATE.isoformat(),
         },
     )
     assert response.status_code == 200
 
 
-def test_redirect_link_not_yet_expired(mocked_now, client):
+@freeze_time("2020-01-01")
+def test_redirect_link_unexpired(client):
     response = client.get("/expired")
     assert response.status_code == 302
 

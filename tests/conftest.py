@@ -26,8 +26,3 @@ def db(app):
     with app.app_context():
         yield _db
         _db.drop_all()
-
-
-@pytest.fixture()
-def mocked_now(mocker):
-    return mocker.patch("app.index.now", lambda: datetime(2020, 1, 1, 0, 0, 0))

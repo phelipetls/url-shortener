@@ -5,7 +5,6 @@ from app import db
 from .db import Url
 
 from .url_utils import get_short_url, check_url
-from .date_utils import now
 
 from datetime import datetime
 
@@ -18,7 +17,7 @@ def index(short_url=None):
     if short_url:
         query = Url.query.filter_by(short_url=short_url).first_or_404()
 
-        if query.expiration_date and query.expiration_date < now():
+        if query.expiration_date and query.expiration_date < datetime.now():
             return {"error": "Expired"}, 400
 
         return redirect(query.url)
