@@ -3,6 +3,7 @@ import pytest
 from app import create_app
 from app.db import db as _db
 from dotenv import load_dotenv
+from datetime import datetime
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -25,3 +26,8 @@ def db(app):
     with app.app_context():
         yield _db
         _db.drop_all()
+
+
+@pytest.fixture()
+def mocked_now(mocker):
+    return mocker.patch("app.index.now", lambda: datetime(2020, 1, 1, 0, 0, 0))
