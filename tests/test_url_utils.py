@@ -1,4 +1,3 @@
-import pytest
 from app.url_utils import get_short_url
 
 

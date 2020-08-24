@@ -1,8 +1,8 @@
-import os
 from flask import Flask
 from .db import db
 
-def create_app(config='config.Config'):
+
+def create_app(config="config.Config"):
     app = Flask(__name__)
     app.config.from_object(config)
 
@@ -12,6 +12,7 @@ def create_app(config='config.Config'):
         db.create_all()
 
         from . import index
+
         app.register_blueprint(index.bp)
 
         return app

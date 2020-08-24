@@ -1,8 +1,10 @@
 from flask import Blueprint, render_template, request, redirect
+from sqlalchemy.exc import IntegrityError
+
 from app import db
 from .db import Url
+
 from .url_utils import get_short_url, check_url
-from sqlalchemy.exc import IntegrityError
 from .date_utils import now
 
 from datetime import datetime

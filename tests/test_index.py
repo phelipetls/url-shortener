@@ -1,10 +1,7 @@
-import re
-
-import pytest
 import html
 
 from app.db import Url
-from datetime import datetime, timedelta
+from datetime import datetime
 
 URL = "https://google.com"
 
