@@ -38,7 +38,7 @@ def test_redirect_with_alias(client):
     assert response.headers["Location"] == html.escape(URL)
 
 
-EXPIRATION_DATE = datetime(2020, 1, 2)
+EXPIRATION_DATE = "2020-01-02T22:50:00.000Z"
 
 
 def test_new_with_expiration_date(client):
@@ -47,7 +47,7 @@ def test_new_with_expiration_date(client):
         json={
             "url": URL,
             "alias": "expired",
-            "expirationDate": EXPIRATION_DATE.isoformat(),
+            "expirationDate": EXPIRATION_DATE,
         },
     )
     assert response.status_code == 200
@@ -90,7 +90,7 @@ def test_invalid_urls(client, url, message):
 
 def test_new_non_iso_date(client):
     response = client.post(
-        "/new", json={"url": URL, "alias": "expired", "expirationDate": "INVALID"},
+        "/new", json={"url": URL, "alias": "expired", "expirationDate": "2020 13 August"},
     )
     assert response.status_code == 400
-    assert response.json == {"error": "INVALID is not in ISO format"}
+    assert response.json == {"error": "'2020 13 August' invalid ISO 8601 format"}

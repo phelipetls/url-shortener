@@ -1,3 +1,5 @@
+from dateutil.parser import isoparse
+
 from flask import Blueprint, request, redirect, send_from_directory
 from sqlalchemy.exc import IntegrityError
 
@@ -46,10 +48,10 @@ def new():
 
     if expiration_date:
         try:
-            iso_date = datetime.fromisoformat(expiration_date)
+            iso_date = isoparse(expiration_date)
             row = Url(url=url, short_url=short_url, expiration_date=iso_date)
         except ValueError:
-            return {"error": f"{expiration_date} is not in ISO format"}, 400
+            return {"error": f"'{expiration_date}' invalid ISO 8601 format"}, 400
     else:
         row = Url(url=url, short_url=short_url)
 
