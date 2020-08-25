@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, request, redirect, send_from_directory
 from sqlalchemy.exc import IntegrityError
 
 from app import db
@@ -12,17 +12,21 @@ bp = Blueprint("index", __name__)
 
 
 @bp.route("/")
+def index():
+    return send_from_directory("static", filename="index.html")
+
+
 @bp.route("/<short_url>")
-def index(short_url=None):
-    if short_url:
-        query = Url.query.filter_by(short_url=short_url).first_or_404()
+def redirect_short_url(short_url=None):
+    if not short_url:
+        return
 
-        if query.expiration_date and query.expiration_date < datetime.now():
-            return {"error": "Expired"}, 400
+    query = Url.query.filter_by(short_url=short_url).first_or_404()
 
-        return redirect(query.url)
+    if query.expiration_date and query.expiration_date < datetime.now():
+        return {"error": "Expired"}, 400
 
-    return render_template("index.html")
+    return redirect(query.url)
 
 
 @bp.route("/new", methods=["POST"])
