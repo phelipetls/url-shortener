@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>
+        Url shortener
+      </h1>
+
+      <input type="text" placeholder="Enter url"/>
+      <input type="text" placeholder="Enter alias"/>
+      <button type="submit">Create</button>
+
+      <div class="output" hidden>{{ output }}</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

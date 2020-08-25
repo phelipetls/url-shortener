@@ -1,0 +1,32 @@
+body {
+  min-height: 100vh;
+  display: grid;
+}
+
+#app h1 {
+  font-family: sans-serif;
+}
+
+#app button {
+  height: 3em;
+}
+
+#app {
+  align-self: center;
+  justify-self: center;
+
+  display: flex;
+  flex-flow: column;
+}
+
+#app *:not(:first-child) {
+  margin-top: 1em;
+}
+
+#app label {
+  align-self: center;
+}
+
+#app label ::placeholder {
+  text-align: center;
+}
