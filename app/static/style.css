@@ -1,19 +1,7 @@
 body {
+  font-family: sans-serif;
   min-height: 100vh;
   display: grid;
-}
-
-#app form {
-  display: flex;
-  flex-flow: column;
-}
-
-#app h1 {
-  font-family: sans-serif;
-}
-
-#app button {
-  height: 3em;
 }
 
 #app {
@@ -24,7 +12,20 @@ body {
   flex-flow: column;
 }
 
-#app *:not(:first-child) {
+#app h1 {
+  color: #797979;
+}
+
+#app form {
+  display: flex;
+  flex-flow: column;
+}
+
+#app input[type='text']::placeholder {
+  text-align: center;
+}
+
+form *:not(:first-child) {
   margin-top: 1em;
 }
 
@@ -34,4 +35,39 @@ body {
 
 #app label ::placeholder {
   text-align: center;
+}
+
+#app .output {
+  color: white;
+  font-family: sans-serif;
+  font-size: smaller;
+  text-align: center;
+  padding: 0.3em 0.5em;
+  margin-top: 1.5em;
+  border-radius: 5px;
+}
+
+#app .error {
+  background-color: #c4342d; /* red */
+}
+
+#app .success {
+  background-color: #28a9af;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#app .success .short-url {
+  flex: 1;
+}
+
+#app .success svg {
+  fill: #e1f1f1;
+  cursor: pointer;
+}
+
+[v-if] {
+  display: none;
 }

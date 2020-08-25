@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
     <div id="app">
@@ -12,16 +12,31 @@
         Url shortener
       </h1>
 
-      <form method="post" @submit.prevent="getShortUrl()">
-        <input type="text" placeholder="Enter url"/>
-        <input type="text" placeholder="Enter alias"/>
-        <button type="submit">Create</button>
+      <form id="shortener" method="post" @submit.prevent="getShortUrl">
+        <input
+          id="url"
+          name="url"
+          type="text"
+          placeholder="Enter url"
+          required
+        />
+        <input id="alias" name="alias" type="text" placeholder="Enter alias" />
+        <input id="submit" type="submit" value="Create" />
       </form>
 
-      <div class="output" hidden>{{ output }}</div>
+      <div class="output error" v-if="error">
+        {{ error }}
+      </div>
+
+      <div class="output success" v-if="short_url">
+        <a v-bind:href="shortUrlLink" class="short-url">{{ short_url }}</a>
+        <div class="copy" @click="copyShortUrl">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="M20,2H10C8.897,2,8,2.897,8,4v4H4c-1.103,0-2,0.897-2,2v10c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2v-4h4 c1.103,0,2-0.897,2-2V4C22,2.897,21.103,2,20,2z M4,20V10h10l0.002,10H4z M20,14h-4v-4c0-1.103-0.897-2-2-2h-4V4h10V14z" /></svg>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="./app.js"></script>
+    <script src="/static/app.js"></script>
   </body>
 </html>
