@@ -3,6 +3,11 @@ body {
   display: grid;
 }
 
+#app form {
+  display: flex;
+  flex-flow: column;
+}
+
 #app h1 {
   font-family: sans-serif;
 }

@@ -12,9 +12,11 @@
         Url shortener
       </h1>
 
-      <input type="text" placeholder="Enter url"/>
-      <input type="text" placeholder="Enter alias"/>
-      <button type="submit">Create</button>
+      <form method="post" @submit.prevent="getShortUrl()">
+        <input type="text" placeholder="Enter url"/>
+        <input type="text" placeholder="Enter alias"/>
+        <button type="submit">Create</button>
+      </form>
 
       <div class="output" hidden>{{ output }}</div>
     </div>
