@@ -32,6 +32,12 @@ def test_new_with_alias(client):
     assert response.status_code == 200
 
 
+def test_new_with_repeated_alias(client):
+    response = client.post("/new", json={"alias": "my-site", "url": URL})
+    assert response.status_code == 400
+    assert b"Alias not available" in response.data
+
+
 def test_redirect_with_alias(client):
     response = client.get("/my-site")
     assert response.status_code == 302

@@ -60,5 +60,7 @@ def new():
         db.session.commit()
     except IntegrityError:
         db.session.rollback()
+        if alias:
+            return {"error": "Alias not available"}, 400
 
     return {"shortUrl": short_url}, 200
