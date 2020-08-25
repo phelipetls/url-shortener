@@ -28,7 +28,7 @@ def test_redirect(client, db):
 
 def test_new_with_alias(client):
     response = client.post("/new", json={"alias": "my-site", "url": URL})
-    assert response.json["short_url"] == "my-site"
+    assert response.json["shortUrl"] == "my-site"
     assert response.status_code == 200
 
 
@@ -47,7 +47,7 @@ def test_new_with_expiration_date(client):
         json={
             "url": URL,
             "alias": "expired",
-            "expiration_date": EXPIRATION_DATE.isoformat(),
+            "expirationDate": EXPIRATION_DATE.isoformat(),
         },
     )
     assert response.status_code == 200
@@ -90,7 +90,7 @@ def test_invalid_urls(client, url, message):
 
 def test_new_non_iso_date(client):
     response = client.post(
-        "/new", json={"url": URL, "alias": "expired", "expiration_date": "INVALID"},
+        "/new", json={"url": URL, "alias": "expired", "expirationDate": "INVALID"},
     )
     assert response.status_code == 400
     assert response.json == {"error": "INVALID is not in ISO format"}

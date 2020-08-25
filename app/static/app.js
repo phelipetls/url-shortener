@@ -2,11 +2,11 @@ const app = new Vue({
   el: "#app",
   data: {
     error: null,
-    short_url: null
+    shortUrl: null
   },
   computed: {
     shortUrlLink: function() {
-      return `/${this.short_url}`
+      return `/${this.shortUrl}`
     },
   },
   methods: {
@@ -20,9 +20,9 @@ const app = new Vue({
         body: JSON.stringify({ url, alias })
       });
 
-      const { error, short_url } = await response.json();
+      const { error, shortUrl } = await response.json();
       this.error = error;
-      this.short_url = short_url;
+      this.shortUrl = shortUrl;
     },
     copyShortUrl() {
       const shortUrl = document.querySelector(".short-url").href;

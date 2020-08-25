@@ -35,7 +35,7 @@ def new():
 
     url = json.get("url")
     alias = json.get("alias")
-    expiration_date = json.get("expiration_date")
+    expiration_date = json.get("expirationDate")
 
     error = check_url(url)
 
@@ -59,4 +59,4 @@ def new():
     except IntegrityError:
         db.session.rollback()
 
-    return {"short_url": short_url}, 200
+    return {"shortUrl": short_url}, 200
