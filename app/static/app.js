@@ -32,8 +32,8 @@ const app = new Vue({
       this.shortUrl = shortUrl;
     },
     copyShortUrl() {
-      const shortUrl = document.querySelector(".short-url").href;
-      navigator.clipboard.writeText(shortUrl);
+      const shortUrlLink = document.querySelector(".short-url").href;
+      navigator.clipboard.writeText(shortUrlLink);
     },
     currentDate() {
       return new Date().toISOString().slice(0, 10);
