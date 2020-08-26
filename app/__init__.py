@@ -11,8 +11,7 @@ def create_app(config="config.Config"):
     with app.app_context():
         db.create_all()
 
-        from . import index
-
-        app.register_blueprint(index.bp)
+        from . import routes
+        app.register_blueprint(routes.bp)
 
         return app
