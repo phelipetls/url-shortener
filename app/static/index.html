@@ -19,8 +19,20 @@
         <label class="expiration">
           <small>Expires at</small>
         </label>
-        <input id="date" name="date" type="date" />
-        <input id="time" name="time" type="time" />
+        <input
+          id="date"
+          name="date"
+          type="date"
+          :min="currentDate()"
+          title="Enter an expiration date for the link"
+        />
+        <input
+          id="time"
+          name="time"
+          type="time"
+          :min="currentTime()"
+          title="Enter an expiration time for the link"
+         />
 
         <input id="submit" type="submit" value="Create" />
       </form>
