@@ -35,14 +35,8 @@ const app = new Vue({
       const shortUrl = document.querySelector(".short-url").href;
       navigator.clipboard.writeText(shortUrl);
     },
-    today() {
-      return new Date().toISOString();
-    },
     currentDate() {
-      return this.today().slice(0, 10);
+      return new Date().toISOString().slice(0, 10);
     },
-    currentTime() {
-      return this.today().slice(11);
-    }
   }
 });
