@@ -25,7 +25,7 @@ def redirect_short_url(short_url=None):
 
     query = Url.query.filter_by(short_url=short_url).first_or_404()
 
-    if query.expiration_date and query.expiration_date < datetime.now():
+    if query.expiration_date and query.expiration_date < datetime.utcnow():
         return {"error": "Expired"}, 400
 
     return redirect(query.url)
