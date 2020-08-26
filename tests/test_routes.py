@@ -50,7 +50,7 @@ EXPIRATION_DATE = "2020-01-02T22:50:00.000Z"
 def test_new_with_expiration_date(client):
     response = client.post(
         "/new",
-        json={"url": URL, "alias": "expired", "expirationDate": EXPIRATION_DATE,},
+        json={"url": URL, "alias": "expired", "expirationDate": EXPIRATION_DATE},
     )
     assert response.status_code == 200
 

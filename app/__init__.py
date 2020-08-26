@@ -1,5 +1,6 @@
 from flask import Flask
 from .db import db
+from . import routes
 
 
 def create_app(config="config.Config"):
@@ -10,8 +11,5 @@ def create_app(config="config.Config"):
 
     with app.app_context():
         db.create_all()
-
-        from . import routes
         app.register_blueprint(routes.bp)
-
         return app
