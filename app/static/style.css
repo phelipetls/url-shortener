@@ -39,9 +39,9 @@ input#alias {
   grid-area: alias;
 }
 
-small.expiration {
+label.expiration {
   grid-area: expiration;
-  margin-bottom: -0.5em;
+  margin-bottom: -0.7em;
 }
 
 input#date {
