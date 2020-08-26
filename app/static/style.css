@@ -13,28 +13,53 @@ body {
 }
 
 #app h1 {
+  text-align: center;
   color: #797979;
 }
 
-#app form {
+#app form input {
+  text-align: center;
+}
+
+form {
+  display: grid;
+  grid-row-gap: 1em;
+  grid-template: "url url"
+                 "alias alias"
+                 "expiration expiration"
+                 "date time"
+                 "submit submit";
+}
+
+input#url {
+  grid-area: url;
+}
+
+input#alias {
+  grid-area: alias;
+}
+
+small.expiration {
+  grid-area: expiration;
+  margin-bottom: -0.5em;
+}
+
+input#date {
+  grid-area: date;
+}
+
+input#time {
+  grid-area: time;
+  margin-left: 1em;
+}
+
+input#submit {
+  grid-area: submit;
+}
+
+form label {
   display: flex;
   flex-flow: column;
-}
-
-#app input[type='text']::placeholder {
-  text-align: center;
-}
-
-form *:not(:first-child) {
-  margin-top: 1em;
-}
-
-#app label {
-  align-self: center;
-}
-
-#app label ::placeholder {
-  text-align: center;
 }
 
 #app .output {
@@ -48,7 +73,7 @@ form *:not(:first-child) {
 }
 
 #app .error {
-  background-color: #c4342d; /* red */
+  background-color: #c4342d;
 }
 
 #app .success {
@@ -57,6 +82,11 @@ form *:not(:first-child) {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+#app .success a {
+  color: inherit;
+  text-decoration: none;
 }
 
 #app .success .short-url {

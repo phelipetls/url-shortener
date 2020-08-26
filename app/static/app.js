@@ -6,18 +6,25 @@ const app = new Vue({
   },
   computed: {
     shortUrlLink: function() {
-      return `/${this.shortUrl}`
-    },
+      return `/${this.shortUrl}`;
+    }
   },
   methods: {
-    async getShortUrl(url, alias) {
-      url = document.getElementById("url").value;
-      alias = document.getElementById("alias").value;
+    async getShortUrl() {
+      const url = document.getElementById("url").value;
+      const alias = document.getElementById("alias").value;
+
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+
+      const expirationDate = date
+        ? new Date(`${date} ${time}`).toISOString()
+        : null;
 
       const response = await fetch("/new", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ url, alias })
+        body: JSON.stringify({ url, alias, expirationDate })
       });
 
       const { error, shortUrl } = await response.json();
