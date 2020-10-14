@@ -2,7 +2,6 @@ import html
 import pytest
 
 from app.db import Url
-from datetime import datetime
 from freezegun import freeze_time
 
 URL = "https://google.com"

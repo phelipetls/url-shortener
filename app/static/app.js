@@ -13,7 +13,6 @@ const app = new Vue({
     async getShortUrl() {
       const url = document.getElementById("url").value;
       const alias = document.getElementById("alias").value;
-
       const date = document.getElementById("date").value;
       const time = document.getElementById("time").value;
 
@@ -26,8 +25,8 @@ const app = new Vue({
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ url, alias, expirationDate })
       });
-
       const { error, shortUrl } = await response.json();
+
       this.error = error;
       this.shortUrl = shortUrl;
     },
