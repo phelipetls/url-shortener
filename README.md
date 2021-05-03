@@ -3,19 +3,13 @@
 This is a simple URL shortener made for learning the basics of Flask and
 Vue.
 
-[It is hosted on Heroku with a silly name](https://xsurl.herokuapp.com/), using
-PostgreSQL as the database and `SQLAlchemy` as ORM (with `Flask-SQLAlchemy`
-extension). Of course, it has a very simple database model: a single table with
-a primary key, a URL, a short token (6 characters, randomly generate with
-`secrets.token_urlsafe()`) and an optional expiration date.
+It uses PostgreSQL as the database and `Flask-SQLAlchemy`. It has a
+very simple database model: a single table with a primary key, a URL, a short
+token and an optional expiration date.
 
-I was especially interested in learning how to test the application and [it was
-great to discover how easy it actually is](/tests).
+I was especially interested in learning how to test the server.
 
-The front-end is not very involved, but I ended reading a little bit about Vue
-to make it because I was interested in it.
+The front-end was made with vue and is not very involved.
 
-I spent a lot of time reading about the best algorithm to go about this. From
-hashing the URL and encoding it an URL-friendly way to change the database's
-number id base. I ended just using Python's `secrets` module to generate a
-random 6 string because it was simpler and this isn't intended to scale anyway.
+I used to host it on Heroku but decided to not do it anymore since these
+applications can be exploited.
